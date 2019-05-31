@@ -40,7 +40,7 @@
       font-size: var(--font-size);
       height: var(--button-height);
       padding: 0 1em;
-      margin: 10px;
+      margin: 20px 0px;
       border-radius: var(--border-radius);
       border: 1px solid var(--border-color);
       background: var(--button-bg);
