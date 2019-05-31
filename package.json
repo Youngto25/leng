@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Youngto25/leng/issues"
   },
-  "homepage": "https://github.com/Youngto25/leng#readme"
+  "homepage": "https://github.com/Youngto25/leng#readme",
+  "devDependencies": {
+    "vue": "^2.6.10"
+  }
 }
