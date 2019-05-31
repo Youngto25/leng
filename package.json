@@ -1,0 +1,19 @@
+{
+  "name": "first-graduation-design",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Youngto25/leng.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Youngto25/leng/issues"
+  },
+  "homepage": "https://github.com/Youngto25/leng#readme"
+}
