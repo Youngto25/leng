@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Youngto25/leng#readme",
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.0.0",
+    "chai": "^4.2.0",
     "parcel-bundler": "^1.12.3",
     "sass": "^1.20.1",
     "vue": "^2.6.10",
@@ -27,6 +28,6 @@
     "vue-hot-reload-api": "^2.3.3"
   },
   "alias": {
-    "vue" : "./node_modules/vue/dist/vue.common.js"
+    "vue": "./node_modules/vue/dist/vue.common.js"
   }
 }
