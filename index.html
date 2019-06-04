@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-    *{
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    :root{
+
+    :root {
       --button-height: 32px;
       --font-size: 14px;
       --button-bg: white;
@@ -21,10 +23,27 @@
       --border-color: #999;
       --border-color-hover: #666;
     }
+    .box{
+      margin: 10px;
+    }
   </style>
 </head>
+
 <body>
   <div id="app">
+    <div>
+      <div class="box">
+        <g-input value="Blake"></g-input>
+        <g-input value="Yang"></g-input>
+        <g-input value="Disabled" disabled></g-input>
+        <g-input value="ReadOnly" readonly></g-input>
+      </div>
+      <div class="box">
+        <g-input value="Error" error="姓名不能少于两个字"></g-input>
+      </div>
+    </div>
+
+
     <g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
     <g-button icon="setting" icon-position="left" :loading="loading2" @click="loading2 = !loading2">按钮</g-button>
     <g-button icon="setting" icon-position="right" :loading="loading3" @click="loading3 = !loading3">按钮</g-button>
@@ -36,7 +55,8 @@
     </g-button-group>
     <div id="test"></div>
   </div>
-<script src="src/app.js"></script>
-<script src="//at.alicdn.com/t/font_1221925_b30aebwoa7.js"></script>
+  <script src="src/app.js"></script>
+  <script src="//at.alicdn.com/t/font_1221925_9ao82ahnr1s.js"></script>
 </body>
+
 </html>
