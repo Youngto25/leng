@@ -34,10 +34,22 @@ export default {
   computed: {
     colClass() {
       let { span, offset, phone } = this;
+      let x = (obj,str='')=>{
+        let array = []
+        if(!obj){
+          return ''
+        }
+        if(obj.span){
+          array.push(`col-${str}${obj.span}`)
+        }
+        if(obj.offset){
+          array.push(`col-${str}${obj.offset}`)
+        }
+        return array
+      }
       return [
-        span && `col-${span}`,
-        offset && `offset-${offset}`,
-        phone && `col-phone-${phone.span}`
+        ...x({span,offset}),
+        ...x(phone,'phone-')
       ];
     },
     colStyle() {
