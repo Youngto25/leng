@@ -33,11 +33,34 @@
 
 <body>
   <style>
-    
 
     
   </style>
   <div id="app">
+    <g-layout style="height: 100vh">
+      <g-header>header</g-header>
+      <g-content>content</g-content>
+      <g-footer>footer</g-footer>
+    </g-layout>
+
+    <g-layout>
+      <g-header>header</g-header>
+      <g-layout>
+        <g-sider>sider</g-sider>
+        <g-content>content</g-content>
+      </g-layout>
+      <g-footer>footer</g-footer>
+    </g-layout>
+    
+    <g-layout>
+      <g-sider>sider</g-sider>
+      <g-layout>
+        <g-header>header</g-header>
+        <g-content>content</g-content>
+        <g-footer>footer</g-footer>
+      </g-layout>
+    </g-layout>
+    <hr>
     <div style="margin: 20px;border: 1px solid">
         <g-row gutter="20">
             <g-col span="8" :phone="{span:12,offset:0}">1</g-col>
