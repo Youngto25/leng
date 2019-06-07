@@ -1,9 +1,6 @@
 const expect = chai.expect;
 import Vue from 'vue'
 import Col from '../src/col'
-import {
-    truncate
-} from 'fs';
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
@@ -11,27 +8,49 @@ Vue.config.devtools = false
 describe('Col', () => {
     it('Col存在.', () => {
         expect(Col).to.be.ok
-        expect(Vue).to.be.ok
     })
-/*
-    describe('props', () => {
-        const Constructor = Vue.extend(Input)
-        let vm
-        afterEach(function () {
-            vm.$destroy()
-        })
-
-
-        it('接受gutter属性.', () => {
-            vm = new Constructor({
-                propsData: {
-                    value: 'joker'
-                }
-            }).$mount()
-            const useElement = vm.$el.querySelector('input')
-            expect(useElement.value).to.equal('joker')
-            vm.$destroy()
-        })
+    it('接收 span 属性',()=>{
+        const div = document.createElement('div')
+        document.body.appendChild(div)
+        const Constructor = Vue.extend(Col)
+        const vm = new Constructor({
+          propsData: {
+            span: 1
+          }
+        }).$mount(div)
+        const element = vm.$el
+        expect(vm.$el.classList.contains('col-1')).to.eq(true)
+        vm.$el.remove()
+        vm.$destroy()
     })
-    */
+    it('接收 offset 属性',()=>{
+        const div = document.createElement('div')
+        document.body.appendChild(div)
+        const Constructor = Vue.extend(Col)
+        const vm = new Constructor({
+          propsData: {
+            offset: 1
+          }
+        }).$mount(div)
+        expect(vm.$el.classList.contains('offset-1')).to.eq(true)
+        vm.$el.remove()
+        vm.$destroy()
+    })
+    it('接收 phone 属性',()=>{
+        const div = document.createElement('div')
+        document.body.appendChild(div)
+        const Constructor = Vue.extend(Col)
+        const vm = new Constructor({
+          propsData: {
+            phone: {
+              span: 1,
+              offset: 2
+            }
+          }
+        }).$mount(div)
+        expect(vm.$el.classList.contains('col-phone-1')).to.eq(true)
+        expect(vm.$el.classList.contains('offset-phone-2')).to.eq(true)
+        vm.$el.remove()
+        vm.$destroy()
+    })
 })
