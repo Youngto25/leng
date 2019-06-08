@@ -34,9 +34,12 @@
 <body>
   <style>
 
-    
+
   </style>
   <div id="app">
+
+    <button @click="showToast">click</button>
+
     <g-layout style="height: 100vh">
       <g-header>header</g-header>
       <g-content>content</g-content>
@@ -51,7 +54,7 @@
       </g-layout>
       <g-footer>footer</g-footer>
     </g-layout>
-    
+
     <g-layout>
       <g-sider>sider</g-sider>
       <g-layout>
@@ -62,21 +65,21 @@
     </g-layout>
     <hr>
     <div style="margin: 20px;border: 1px solid">
-        <g-row gutter="20">
-            <g-col span="8" :phone="{span:12,offset:0}">1</g-col>
-            <g-col span="16" :phone="{span:12,offset:0}">2</g-col>
-          </g-row>
-          <g-row gutter="20">
-            <g-col span="1">3</g-col>
-            <g-col>4</g-col>
-            <g-col>5</g-col>
-          </g-row>
-          <g-row gutter="20">
-            <g-col span="4">6</g-col>
-            <g-col span="18" offset="2">7</g-col>
-          </g-row>
+      <g-row gutter="20">
+        <g-col span="8" :phone="{span:12,offset:0}">1</g-col>
+        <g-col span="16" :phone="{span:12,offset:0}">2</g-col>
+      </g-row>
+      <g-row gutter="20">
+        <g-col span="1">3</g-col>
+        <g-col>4</g-col>
+        <g-col>5</g-col>
+      </g-row>
+      <g-row gutter="20">
+        <g-col span="4">6</g-col>
+        <g-col span="18" offset="2">7</g-col>
+      </g-row>
     </div>
-    
+
     <hr>
     <div>
       <div class="box">
