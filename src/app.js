@@ -51,7 +51,7 @@ new Vue({
             toast.log()
             console.log('用户说他知道了')
           },
-          enableHtml: true,
+          enableHtml: false,
           autoClose: false
         }
       })
