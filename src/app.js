@@ -45,15 +45,15 @@ new Vue({
     showToast(){
       this.$toast('我是<strong>加粗文字</strong><p>我是<strong>加粗文字</strong><p>我是<strong>加粗文字</strong><p>我是<strong>加粗文字</strong>',{
         closeButton: {
-          position: 'bottom',
           text:'知道了',
           callback(toast){
             toast.log()
             console.log('用户说他知道了')
           },
-          enableHtml: false,
-          autoClose: false
-        }
+        },
+        position: 'bottom',
+        enableHtml: true,
+        autoClose: false
       })
     }
   }

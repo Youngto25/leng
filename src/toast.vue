@@ -61,7 +61,6 @@ export default {
     },
     execAutoClose() {
       this.$nextTick(() => {
-        console.log(this.$refs.wrapper.getBoundingClientRect().height);
         this.$refs.line.style.height = `${
           this.$refs.wrapper.getBoundingClientRect().height
         }px`;
@@ -69,12 +68,13 @@ export default {
     },
     close() {
       this.$el.remove();
+      this.$emit('close')
       this.$destroy();
     },
     log() {
       console.log(
         "callback想调用子组件方法，可以将this传给callback,this就是toast实例"
-      );
+      )
     },
     onClickClose() {
       this.close();
@@ -89,7 +89,12 @@ export default {
 $font-size: 14px;
 $toast-min-height: 40px;
 $toast-bg: black;
+@keyframes fade-in {
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
 .toast {
+  animation: fade-in 1s;
   font-size: $font-size;
   min-height: $toast-min-height;
   line-height: 1.8;
