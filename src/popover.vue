@@ -1,6 +1,6 @@
 <template>
-  <div class="popover" @click="xxx">
-    <div v-if="visible" class="content-wrapper">
+  <div class="popover" @click.stop="xxx">
+    <div v-if="visible" class="content-wrapper" @click.stop>
       <slot name="content"></slot>
     </div>
     <slot></slot>
@@ -9,11 +9,26 @@
 <script>
 export default {
   props: {
-    visible: false
+    
+  },
+  data(){
+    return {
+      visible: false
+    }
   },
   methods: {
     xxx(){
       this.visible = !this.visible
+      if(this.visible === true){
+        this.$nextTick(()=>{
+          let y = ()=>{
+            console.log(this.visible)
+            this.visible = false
+            document.removeEventListener('click',y)
+          } 
+          document.addEventListener('click', y)
+        })
+      }
     }
   }
 }
