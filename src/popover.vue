@@ -148,6 +148,7 @@ $border-radius: 4px;
       margin-top: -10px;
       &::before, &::after {
         left: 10px;
+        border-bottom: none;
       }
       &::before {
         border-top-color: black;
@@ -163,6 +164,7 @@ $border-radius: 4px;
       margin-top: -10px;
       &::before, &::after {
         left: 10px;
+        border-top: none;
       }
       &::before {
         border-bottom-color: black;
@@ -178,6 +180,7 @@ $border-radius: 4px;
       transform: translateX(-100%);
       margin-left: -10px;
       &::before, &::after {
+        border-right: none;
         transform: translateY(-50%);
         top: 50%;
       }
@@ -194,6 +197,7 @@ $border-radius: 4px;
       filter: drop-shadow(-1px 0 1px rgba(0, 0, 0, 0.5));
       margin-left: 10px;
       &::before, &::after {
+        border-left: none;
         transform: translateY(-50%);
         top: 50%;
       }
