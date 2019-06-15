@@ -26,28 +26,20 @@ export default {
   },
   inject: ['eventBus'],
   mounted(){
-    this.eventBus && this.eventBus.$on('update:selected',(name)=>{
-      if(name !== this.name){
-        if(this.single){
-          this.close()
-        }
+    this.eventBus && this.eventBus.$on('update:selected',(names)=>{
+      if(names.indexOf(this.name) >= 0){
+        this.open = true
       }else{
-        this.show()
+        this.open = false
       }
     })
   },
   methods:{
-    close(){
-      this.open = false
-    },
-    show(){
-      this.open = true
-    },
     toggle(){
       if(this.open === true){
-        this.close()
+        this.eventBus && this.eventBus.$emit('update:removeSelected',this.name)
       }else{
-        this.eventBus && this.eventBus.$emit('update:selected',this.name)
+        this.eventBus && this.eventBus.$emit('update:addSelected',this.name)
       }
     }
   }

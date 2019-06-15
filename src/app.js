@@ -53,7 +53,7 @@ new Vue({
     loading3: false,
     message: '',
     selectedTab: 'woman',
-    selectedTab2: '2'
+    selectedTab2: ['2','1']
   },
   created(){
     
