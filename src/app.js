@@ -52,7 +52,8 @@ new Vue({
     loading2: true,
     loading3: false,
     message: '',
-    selectedTab: 'woman'
+    selectedTab: 'woman',
+    selectedTab2: '2'
   },
   created(){
     

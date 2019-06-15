@@ -38,10 +38,10 @@
   </style>
   <div id="app">
   <div style="margin: 50px;">
-    <g-collapse single>
-      <g-collapse-item title="HTML">HTML1</g-collapse-item>
-      <g-collapse-item title="CSS">CSS1</g-collapse-item>
-      <g-collapse-item title="JavaScript">JavaScript1</g-collapse-item>
+    <g-collapse single :selected.sync="selectedTab2">
+      <g-collapse-item title="HTML" name="1">HTML1</g-collapse-item>
+      <g-collapse-item title="CSS" name="2">CSS1</g-collapse-item>
+      <g-collapse-item title="JavaScript" name="3">JavaScript1</g-collapse-item>
     </g-collapse>
   </div>
   
