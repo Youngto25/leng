@@ -12550,7 +12550,13 @@ var _default = {
     'g-icon': _icon.default
   },
   props: {
-    icon: {},
+    icon: {
+      type: String,
+      vilidator: function vilidator(value) {
+        return;
+        ['setting', 'loading', 'info', 'error', 'left', 'right', 'download', 'thumbs-up'].indexOf(value) >= 0;
+      }
+    },
     loading: {
       type: Boolean,
       default: false
@@ -12876,20 +12882,18 @@ exports.default = void 0;
 //
 //
 //
-//
-//
 var _default = {
+  name: 'GuluRow',
   props: {
     gutter: {
       type: [Number, String]
+    },
+    align: {
+      type: String,
+      validator: function validator(value) {
+        return ['left', 'right', 'center'].indexOf(value) >= 0;
+      }
     }
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$children.forEach(function (vm) {
-      vm.gutter = _this.gutter;
-    });
   },
   computed: {
     rowStyle: function rowStyle() {
@@ -12898,7 +12902,18 @@ var _default = {
         marginLeft: -gutter / 2 + 'px',
         marginRight: -gutter / 2 + 'px'
       };
+    },
+    rowClass: function rowClass() {
+      var align = this.align;
+      return [align && "align-".concat(align)];
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$children.forEach(function (vm) {
+      vm.gutter = _this.gutter;
+    });
   }
 };
 exports.default = _default;
@@ -12916,8 +12931,8 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row", style: _vm.rowStyle },
-    [_vm._t("default", [_vm._t("default")])],
+    { staticClass: "row", class: _vm.rowClass, style: _vm.rowStyle },
+    [_vm._t("default")],
     2
   )
 }
@@ -12975,7 +12990,19 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+var validator = function validator(value) {
+  var keys = Object.keys(value);
+  var valid = true;
+  keys.forEach(function (key) {
+    if (!['span', 'offset'].includes(key)) {
+      valid = false;
+    }
+  });
+  return valid;
+};
+
 var _default = {
+  name: 'GuluCol',
   props: {
     span: {
       type: [Number, String]
@@ -12983,18 +13010,21 @@ var _default = {
     offset: {
       type: [Number, String]
     },
-    phone: {
+    ipad: {
       type: Object,
-      validator: function validator(value) {
-        var keys = Object.keys(value);
-        var valid = true;
-        keys.forEach(function (key) {
-          if (!["span", "offset"].includes(key)) {
-            valid = false;
-          }
-        });
-        return valid;
-      }
+      validator: validator
+    },
+    narrowPc: {
+      type: Object,
+      validator: validator
+    },
+    pc: {
+      type: Object,
+      validator: validator
+    },
+    widePc: {
+      type: Object,
+      validator: validator
     }
   },
   data: function data() {
@@ -13002,40 +13032,45 @@ var _default = {
       gutter: 0
     };
   },
+  methods: {
+    createClasses: function createClasses(obj) {
+      var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+      if (!obj) {
+        return [];
+      }
+
+      var array = [];
+
+      if (obj.span) {
+        array.push("col-".concat(str).concat(obj.span));
+      }
+
+      if (obj.offset) {
+        array.push("offset-".concat(str).concat(obj.offset));
+      }
+
+      return array;
+    }
+  },
   computed: {
     colClass: function colClass() {
       var span = this.span,
           offset = this.offset,
-          phone = this.phone;
-
-      var x = function x(obj) {
-        var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-        var array = [];
-
-        if (!obj) {
-          return '';
-        }
-
-        if (obj.span) {
-          array.push("col-".concat(str).concat(obj.span));
-        }
-
-        if (obj.offset) {
-          array.push("offset-".concat(str).concat(obj.offset));
-        }
-
-        return array;
-      };
-
-      return [].concat(_toConsumableArray(x({
+          ipad = this.ipad,
+          narrowPc = this.narrowPc,
+          pc = this.pc,
+          widePc = this.widePc;
+      var createClasses = this.createClasses;
+      return [].concat(_toConsumableArray(createClasses({
         span: span,
         offset: offset
-      })), _toConsumableArray(x(phone, 'phone-')));
+      })), _toConsumableArray(createClasses(ipad, 'ipad-')), _toConsumableArray(createClasses(narrowPc, 'narrow-pc-')), _toConsumableArray(createClasses(pc, 'pc-')), _toConsumableArray(createClasses(widePc, 'wide-pc-')));
     },
     colStyle: function colStyle() {
       return {
-        paddingLeft: this.gutter / 2 + "px",
-        paddingRight: this.gutter / 2 + "px"
+        paddingLeft: this.gutter / 2 + 'px',
+        paddingRight: this.gutter / 2 + 'px'
       };
     }
   }
@@ -13442,31 +13477,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//构造组件的选项
 var _default = {
+  name: 'GuluToast',
   props: {
     autoClose: {
       type: [Boolean, Number],
-      default: false,
+      default: 5,
       validator: function validator(value) {
-        if (value === false || typeof value === 'number') {
-          return true;
-        } else {
-          return false;
-        }
+        return value === false || typeof value === 'number';
       }
     },
     closeButton: {
       type: Object,
       default: function _default() {
         return {
-          text: "关闭",
+          text: '关闭',
           callback: undefined
         };
       }
     },
     enableHtml: {
       type: Boolean,
-      default: true
+      default: false
     },
     position: {
       type: String,
@@ -13481,7 +13518,7 @@ var _default = {
     this.execAutoClose();
   },
   computed: {
-    toastClass: function toastClass() {
+    toastClasses: function toastClasses() {
       return _defineProperty({}, "position-".concat(this.position), true);
     }
   },
@@ -13489,32 +13526,29 @@ var _default = {
     updateStyles: function updateStyles() {
       var _this = this;
 
-      if (this.autoClose) {
-        setTimeout(function () {
-          _this.close();
-        }, this.autoClose * 1000);
-      }
+      this.$nextTick(function () {
+        _this.$refs.line.style.height = "".concat(_this.$refs.toast.getBoundingClientRect().height, "px");
+      });
     },
     execAutoClose: function execAutoClose() {
       var _this2 = this;
 
-      this.$nextTick(function () {
-        _this2.$refs.line.style.height = "".concat(_this2.$refs.wrapper.getBoundingClientRect().height, "px");
-      });
+      if (this.autoClose) {
+        setTimeout(function () {
+          _this2.close();
+        }, this.autoClose * 1000);
+      }
     },
     close: function close() {
       this.$el.remove();
       this.$emit('close');
       this.$destroy();
     },
-    log: function log() {
-      console.log("callback想调用子组件方法，可以将this传给callback,this就是toast实例");
-    },
     onClickClose: function onClickClose() {
       this.close();
 
-      if (this.closeButton && typeof this.closeButton.callback === "function") {
-        this.closeButton.callback(this);
+      if (this.closeButton && typeof this.closeButton.callback === 'function') {
+        this.closeButton.callback(this); //this === toast实例
       }
     }
   }
@@ -13532,10 +13566,8 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { ref: "wrapper", staticClass: "toast", class: _vm.toastClass },
-    [
+  return _c("div", { staticClass: "gulu-toast", class: _vm.toastClasses }, [
+    _c("div", { ref: "toast", staticClass: "toast" }, [
       _c(
         "div",
         { staticClass: "message" },
@@ -13549,17 +13581,17 @@ exports.default = _default;
         2
       ),
       _vm._v(" "),
-      _vm.closeButton
-        ? _c("div", { ref: "line", staticClass: "line" })
-        : _vm._e(),
+      _c("div", { ref: "line", staticClass: "line" }),
       _vm._v(" "),
       _vm.closeButton
-        ? _c("span", { staticClass: "text", on: { click: _vm.onClickClose } }, [
-            _vm._v(_vm._s(_vm.closeButton.text))
-          ])
+        ? _c(
+            "span",
+            { staticClass: "close", on: { click: _vm.onClickClose } },
+            [_vm._v("\n      " + _vm._s(_vm.closeButton.text) + "\n    ")]
+          )
         : _vm._e()
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13767,15 +13799,21 @@ var _default = {
     var _this = this;
 
     this.eventBus.$on('update:selected', function (item, vm) {
-      var _vm$$el$getBoundingCl = vm.$el.getBoundingClientRect(),
-          height = _vm$$el$getBoundingCl.height,
-          width = _vm$$el$getBoundingCl.width,
-          top = _vm$$el$getBoundingCl.top,
-          left = _vm$$el$getBoundingCl.left;
-
-      _this.$refs.line.style.width = "".concat(width, "px");
-      _this.$refs.line.style.left = "".concat(left, "px");
+      _this.updateLinePosition(vm);
     });
+  },
+  methods: {
+    updateLinePosition: function updateLinePosition(selectedVm) {
+      var _selectedVm$$el$getBo = selectedVm.$el.getBoundingClientRect(),
+          width = _selectedVm$$el$getBo.width,
+          left = _selectedVm$$el$getBo.left;
+
+      var _this$$refs$head$getB = this.$refs.head.getBoundingClientRect(),
+          left2 = _this$$refs$head$getB.left;
+
+      this.$refs.line.style.width = "".concat(width, "px");
+      this.$refs.line.style.left = "".concat(left - left2, "px");
+    }
   }
 };
 exports.default = _default;
@@ -13793,7 +13831,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "tabs-head" },
+    { ref: "head", staticClass: "tabs-head" },
     [
       _vm._t("default"),
       _vm._v(" "),
@@ -14350,16 +14388,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
 var _default = {
-  data: function data() {
-    return {
-      eventBus: new _vue.default()
-    };
-  },
+  name: "GuluCollapse",
   props: {
     single: {
       type: Boolean,
@@ -14369,16 +14399,21 @@ var _default = {
       type: Array
     }
   },
+  data: function data() {
+    return {
+      eventHub: new _vue.default()
+    };
+  },
   provide: function provide() {
     return {
-      eventBus: this.eventBus
+      eventHub: this.eventHub
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    this.eventBus.$emit('update:selected', this.selected);
-    this.eventBus.$on('update:addSelected', function (name) {
+    this.eventHub.$emit('update:selected', this.selected);
+    this.eventHub.$on('update:addSelected', function (name) {
       var selectedCopy = JSON.parse(JSON.stringify(_this.selected));
 
       if (_this.single) {
@@ -14387,21 +14422,18 @@ var _default = {
         selectedCopy.push(name);
       }
 
-      _this.$emit('update:selected', selectedCopy);
+      _this.eventHub.$emit('update:selected', selectedCopy);
 
-      _this.eventBus.$emit('update:selected', selectedCopy);
+      _this.$emit('update:selected', selectedCopy);
     });
-    this.eventBus.$on('update:removeSelected', function (name) {
+    this.eventHub.$on('update:removeSelected', function (name) {
       var selectedCopy = JSON.parse(JSON.stringify(_this.selected));
       var index = selectedCopy.indexOf(name);
       selectedCopy.splice(index, 1);
 
-      _this.$emit('update:selected', selectedCopy);
+      _this.eventHub.$emit('update:selected', selectedCopy);
 
-      _this.eventBus.$emit('update:selected', selectedCopy);
-    });
-    this.$children.forEach(function (vm) {
-      vm.single = _this.single;
+      _this.$emit('update:selected', selectedCopy);
     });
   }
 };
@@ -14418,11 +14450,7 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "collapse" }, [_vm._t("default")], 2),
-    _vm._v(" "),
-    _c("div", [_vm._v("\r\n    " + _vm._s(_vm.selected) + "\r\n  ")])
-  ])
+  return _c("div", { staticClass: "collapse" }, [_vm._t("default")], 2)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -14472,7 +14500,11 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
 var _default = {
+  name: "GuluCollapseItem",
   props: {
     title: {
       type: String,
@@ -14485,15 +14517,14 @@ var _default = {
   },
   data: function data() {
     return {
-      open: false,
-      single: false
+      open: false
     };
   },
-  inject: ['eventBus'],
+  inject: ['eventHub'],
   mounted: function mounted() {
     var _this = this;
 
-    this.eventBus && this.eventBus.$on('update:selected', function (names) {
+    this.eventHub && this.eventHub.$on('update:selected', function (names) {
       if (names.indexOf(_this.name) >= 0) {
         _this.open = true;
       } else {
@@ -14503,10 +14534,10 @@ var _default = {
   },
   methods: {
     toggle: function toggle() {
-      if (this.open === true) {
-        this.eventBus && this.eventBus.$emit('update:removeSelected', this.name);
+      if (this.open) {
+        this.eventHub && this.eventHub.$emit('update:removeSelected', this.name);
       } else {
-        this.eventBus && this.eventBus.$emit('update:addSelected', this.name);
+        this.eventHub && this.eventHub.$emit('update:addSelected', this.name);
       }
     }
   }
@@ -14525,12 +14556,23 @@ exports.default = _default;
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "collapseItem" }, [
-    _c("div", { staticClass: "title", on: { click: _vm.toggle } }, [
-      _vm._v(_vm._s(_vm.single) + _vm._s(_vm.title))
-    ]),
+    _c(
+      "div",
+      {
+        staticClass: "title",
+        attrs: { "data-name": _vm.name },
+        on: { click: _vm.toggle }
+      },
+      [_vm._v("\n    " + _vm._s(_vm.title) + "\n  ")]
+    ),
     _vm._v(" "),
     _vm.open
-      ? _c("div", { staticClass: "content" }, [_vm._t("default")], 2)
+      ? _c(
+          "div",
+          { ref: "content", staticClass: "content" },
+          [_vm._t("default")],
+          2
+        )
       : _vm._e()
   ])
 }
@@ -14717,7 +14759,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "16956" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "23654" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
