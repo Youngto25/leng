@@ -1,62 +1,57 @@
 <template>
-<div>
   <div class="collapse">
     <slot></slot>
   </div>
-  <div>
-    {{selected}}
-  </div>
-</div>
 </template>
+
 <script>
-import Vue from 'vue'
-export default {
-  data(){
-    return {
-      eventBus: new Vue()
-    }
-  },
-  props: {
-    single: {
-      type: Boolean,
-      default: false
+  import Vue from 'vue'
+  export default {
+    name: "GuluCollapse",
+    props: {
+      single: {
+        type: Boolean,
+        default: false
+      },
+      selected: {
+        type: Array,
+      }
     },
-    selected: {
-      type: Array
-    }
-  },
-  provide(){
+    data () {
       return {
-        eventBus: this.eventBus
+        eventHub: new Vue(),
       }
-  },
-  mounted(){
-    this.eventBus.$emit('update:selected',this.selected)
-    this.eventBus.$on('update:addSelected',(name)=>{
-      let selectedCopy = JSON.parse(JSON.stringify(this.selected))
-      if(this.single){
-        selectedCopy = [name]
-      }else{
-        selectedCopy.push(name)
+    },
+    provide () {
+      return {
+        eventHub: this.eventHub
       }
-      this.$emit('update:selected',selectedCopy)
-      this.eventBus.$emit('update:selected',selectedCopy)
-    })
-    this.eventBus.$on('update:removeSelected',(name)=>{
-      let selectedCopy = JSON.parse(JSON.stringify(this.selected))
-      let index = selectedCopy.indexOf(name)
-      selectedCopy.splice(index,1)
-      this.$emit('update:selected',selectedCopy)
-      this.eventBus.$emit('update:selected',selectedCopy)
-    })
-    this.$children.forEach((vm)=>{
-      vm.single = this.single
-    })
+    },
+    mounted () {
+      this.eventHub.$emit('update:selected', this.selected)
+      this.eventHub.$on('update:addSelected', (name) => {
+        let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+        if (this.single) {
+          selectedCopy = [name]
+        } else {
+          selectedCopy.push(name)
+        }
+        this.eventHub.$emit('update:selected', selectedCopy)
+        this.$emit('update:selected', selectedCopy)
+      })
+      this.eventHub.$on('update:removeSelected', (name) => {
+        let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+        let index = selectedCopy.indexOf(name)
+        selectedCopy.splice(index, 1)
+        this.eventHub.$emit('update:selected', selectedCopy)
+        this.$emit('update:selected', selectedCopy)
+      })
+    }
   }
-}
 </script>
-<style lang="scss" scoped>
-$grey: #ddd;
+
+<style scoped lang="scss">
+  $grey: #ddd;
   $border-radius: 4px;
   .collapse {
     border: 1px solid $grey;

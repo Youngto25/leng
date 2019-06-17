@@ -15,7 +15,13 @@ import Icon from './icon'
       'g-icon': Icon
     },
     props: {
-      icon: {},
+      icon: {
+        type: String,
+        vilidator (value){
+          return 
+            ['setting','loading','info','error','left','right','download','thumbs-up'].indexOf(value) >= 0 
+        }
+      },
       loading: {
         type: Boolean,
         default: false
