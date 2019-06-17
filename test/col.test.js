@@ -42,14 +42,14 @@ describe('Col', () => {
         const Constructor = Vue.extend(Col)
         const vm = new Constructor({
           propsData: {
-            phone: {
+            pc: {
               span: 1,
               offset: 2
             }
           }
         }).$mount(div)
-        expect(vm.$el.classList.contains('col-phone-1')).to.eq(true)
-        expect(vm.$el.classList.contains('offset-phone-2')).to.eq(true)
+        expect(vm.$el.classList.contains('col-pc-1')).to.eq(true)
+        expect(vm.$el.classList.contains('offset-pc-2')).to.eq(true)
         vm.$el.remove()
         vm.$destroy()
     })
