@@ -1,14 +1,11 @@
 <template>
-  <div style="padding-top: 16px;">
-    <h2>this.$toast</h2>
+  <div>
     <p>
       <strong>预览</strong>
     </p>
 
     <div>
-      <g-button @click="$toast('点击弹出提示')">上方弹出</g-button>
-      <g-button @click="$toast('点击弹出提示', {position:'middle'})">中间弹出</g-button>
-      <g-button @click="$toast('点击弹出提示', {position:'bottom'})">下方弹出</g-button>
+      <g-button @click="xxxx" >上方弹出，5秒后自动关闭，'正常的文字'是红色</g-button>
     </div>
 
     <p>
@@ -30,25 +27,49 @@
 </style>
 <script>
   import plugin from '../../../src/plugin'
-  import GButton from '../../../src/button'
+  import Button from '../../../src/button/button'
   import Vue from 'vue'
 
   Vue.use(plugin)
 
   export default {
-    components: {GButton},
+    components: {
+      'g-button': Button  
+    },
     data () {
       return {
         content: `
-          <style>
-            .gulu-toast {
-              z-index: 30;
+          <g-button @click="xxxx">上方弹出，5秒后自动关闭，'正常文字是红色'</g-button>
+
+          methods:{
+            xxxx(){
+              this.$toast('正常的文字',{
+                closeButton: {
+                  text:'知道了',
+                  callback(toast){
+                    console.log(toast)
+                  },
+                },
+                position: 'top',
+                enableHtml: true
+              })
             }
-          </style>
-          <g-button @click="$toast('点击弹出提示')">上方弹出</g-button>
-          <g-button @click="$toast('点击弹出提示', {position:'middle'})">中间弹出</g-button>
-          <g-button @click="$toast('点击弹出提示', {position:'bottom'})">下方弹出</g-button>
+          }
       `.replace(/^ {8}/gm, '').trim()
+      }
+    },
+    methods:{
+      xxxx(){
+        this.$toast('<span style="color: red">正常的文字</span>',{
+          closeButton: {
+            text:'知道了',
+            callback(toast){
+              console.log(toast)
+            },
+          },
+          position: 'top',
+          enableHtml: true
+        })
       }
     }
   }

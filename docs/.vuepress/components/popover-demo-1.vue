@@ -1,6 +1,5 @@
 <template>
-  <div style="padding-top: 16px;">
-    <h2>支持 HTML</h2>
+  <div>
     <p>
       <strong>预览</strong>
     </p>
@@ -41,12 +40,15 @@
 <style scoped>
 </style>
 <script>
-  import GButton from '../../../src/button'
-  import GPopover from '../../../src/popover'
+  import Button from '../../../src/button/button'
+  import Popover from '../../../src/popover'
 
 
   export default {
-    components: {GButton, GPopover},
+    components: {
+      'g-button': Button,
+      'g-popover': Popover
+    },
     data () {
       return {
         content: `

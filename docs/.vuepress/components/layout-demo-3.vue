@@ -1,6 +1,5 @@
 <template>
-  <div style="padding-top: 16px;">
-    <h2>布局</h2>
+  <div>
     <p>
       <strong>预览</strong>
     </p>
@@ -33,14 +32,20 @@
   }
 </style>
 <script>
-  import GLayout from '../../../src/layout'
-  import GHeader from '../../../src/header'
-  import GFooter from '../../../src/footer'
-  import GContent from '../../../src/content'
-  import GSider from '../../../src/sider'
+  import Layout from '../../../src/layout/layout'
+  import Header from '../../../src/layout/header'
+  import Footer from '../../../src/layout/footer'
+  import Content from '../../../src/layout/content'
+  import Sider from '../../../src/layout/sider'
 
   export default {
-    components: {GLayout, GHeader, GFooter, GContent, GSider},
+    components: {
+      'g-layout': Layout,
+      'g-header': Header,
+      'g-footer': Footer,
+      'g-content': Content,
+      'g-sider': Sider
+    },
     data () {
       return {
         content: `

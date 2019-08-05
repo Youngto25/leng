@@ -4,8 +4,8 @@
       <strong>预览</strong>
     </p>
 
-    <div style="height: 250px;">
-      <g-collapse :selected.sync="selectedTab2">
+    <div style="height: 200px;">
+      <g-collapse single :selected.sync="selectedTab2">
         <g-collapse-item title="HTML" name="1">
           <div>11</div>
           <div>21</div>
@@ -43,7 +43,7 @@
       return {
         selectedTab2: ['1'],
         content: `
-          <g-collapse :selected.sync="selectedTab2">
+          <g-collapse single :selected.sync="selectedTab2">
             <g-collapse-item title="HTML" name="1">HTML1</g-collapse-item>
             <g-collapse-item title="CSS" name="2">CSS1</g-collapse-item>
             <g-collapse-item title="JavaScript" name="3">JavaScript1</g-collapse-item>

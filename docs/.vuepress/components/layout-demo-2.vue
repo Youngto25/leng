@@ -1,12 +1,11 @@
 <template>
-  <div style="padding-top: 16px;">
-    <h2>布局</h2>
+  <div>
     <p>
       <strong>预览</strong>
     </p>
 
 
-    <g-layout style="color: white; overflow:hidden; margin-bottom:50px;">
+    <g-layout>
       <g-header style="height: 50px; background:lightskyblue;">
         header
       </g-header>
@@ -35,18 +34,24 @@
   }
 </style>
 <script>
-  import GLayout from '../../../src/layout'
-  import GHeader from '../../../src/header'
-  import GFooter from '../../../src/footer'
-  import GContent from '../../../src/content'
-  import GSider from '../../../src/sider'
+  import GLayout from '../../../src/layout/layout'
+  import GHeader from '../../../src/layout/header'
+  import GFooter from '../../../src/layout/footer'
+  import GContent from '../../../src/layout/content'
+  import GSider from '../../../src/layout/sider'
 
   export default {
-    components: {GLayout, GHeader, GFooter, GContent, GSider},
+    components: {
+      'g-layout': GLayout,
+      'g-header': GHeader,
+      'g-footer': GFooter,
+      'g-content': GContent,
+      'g-sider': GSider
+    },
     data () {
       return {
         content: `
-          <g-layout style="color: white; overflow:hidden; margin-bottom:50px;">
+          <g-layout>
             <g-header style="height: 50px; background:lightskyblue;">
               header
             </g-header>
