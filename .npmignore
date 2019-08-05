@@ -1,0 +1,15 @@
+node_modules
+false
+test
+.gitignore
+.travis.yml
+deploy.sh
+index.html
+karma.conf.js
+LICENSE
+package.json
+package-lock.json
+README.md
+yarn.lock
+.cache
+docs
