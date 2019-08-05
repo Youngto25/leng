@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/lengzi/',
+  base: '/leng/',
   title: 'lengzi',
   description: '一个好用的UI框架',
   themeConfig: {
