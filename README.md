@@ -7,9 +7,4 @@
 ## install
 
 使用本框架前，请在CSS中开启border-box
-
-[](https://travis-ci.org/Youngto25/leng.svg?branch=master)
-
-[222](https://travis-ci.org/Youngto25/leng.svg?branch=master)
-
-https://travis-ci.org/Youngto25/leng.svg?branch=master
+[![Build Status](https://travis-ci.org/Youngto25/leng.svg?branch=master)](https://travis-ci.org/Youngto25/leng)
