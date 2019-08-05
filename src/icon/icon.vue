@@ -6,7 +6,11 @@
 <script>
     import './svg'
     export default{
-      props: ['name']
+      props: {
+        name: {
+          type: String
+        }
+      }
     }
 </script>
 <style lang="scss" scoped>

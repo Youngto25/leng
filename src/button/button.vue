@@ -41,7 +41,6 @@ import Icon from '../icon/icon'
   }
 </script>
 <style lang="scss" scoped>
-
 $button-height: 32px;
 $font-size: 14px;
 $button-bg: white;
@@ -50,54 +49,50 @@ $border-radius: 4px;
 $color: #333;
 $border-color: #999;
 $border-color-hover: #666;
+.g-button{
+  font-size: $font-size;
+  height: $button-height;
+  padding: 0 1em;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  background: $button-bg;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  &:hover{
+    border-color: $border-color-hover;
+}
+  &:active{
+    background-color: $button-active-bg;
+}
+  &:focus{
+    outline: none;
+  }
+  .icon{
+    order: 1;
+    margin-right: 0.3em;
+  }
+  .content{
+    order: 2;
+  }
 
-    @keyframes spin{
-      0%{transform: rotate(0deg)}
-      100%{transform: rotate(360deg)}
+  &.icon-right{
+    .icon{
+      order: 2;
+      margin-right: 0;
+      margin-left: 0.3em;
     }
-
-    .g-button{
-      font-size: $font-size;
-      height: $button-height;
-      padding: 0 1em;
-      margin: 20px 0px;
-      border-radius: $border-radius;
-      border: 1px solid $border-color;
-      background: $button-bg;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      vertical-align: middle;
-      &:hover{
-        border-color: $border-color-hover;
+    .content{
+      order: 1;
     }
-      &:active{
-        background-color: $button-active-bg;
-    }
-      &:focus{
-        outline: none;
-      }
-      .icon{
-        order: 1;
-        margin-right: 0.3em;
-      }
-      .content{
-        order: 2;
-      }
-
-      &.icon-right{
-        .icon{
-          order: 2;
-          margin-right: 0;
-          margin-left: 0.3em;
-        }
-        .content{
-          order: 1;
-        }
-      }
-    }
-    .loading{
-      animation: spin 2s infinite linear;
-    }
-    
+  }
+}
+.loading{
+  animation: spin 2s infinite linear;
+}  
+@keyframes spin{
+  0%{transform: rotate(0deg)}
+  100%{transform: rotate(360deg)}
+}  
 </style>

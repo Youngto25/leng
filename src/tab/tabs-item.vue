@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+  name: 'TabsItem',
   data(){
     return {
       active: false
@@ -43,7 +44,7 @@ export default {
       if(this.disabled){
         return 
       }
-      this.eventBus.$emit('update:selected',this.name,this)
+      this.eventBus.$emit('getMessage',this.name,this)
     }
   }
 }

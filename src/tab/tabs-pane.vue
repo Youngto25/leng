@@ -35,9 +35,4 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-.tabs-pane{
-  &.active{
-  }
-}
-</style>
+<style lang="scss" scoped></style>

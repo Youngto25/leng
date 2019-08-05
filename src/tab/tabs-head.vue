@@ -9,6 +9,7 @@
 </template>
 <script>
 export default {
+  name: 'TabsHead',
   inject: ['eventBus'],
   mounted () {
       this.eventBus.$on('update:selected', (item, vm) => {

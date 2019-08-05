@@ -15,7 +15,7 @@
     return valid
   }
   export default {
-    name: 'GuluCol',
+    name: 'Col',
     props: {
       span: {
         type: [Number, String]
@@ -91,7 +91,7 @@
         }
       }
     }
-    @media (min-width: 769px){ // 770
+    @media (min-width: 769px){
       $class-prefix: col-narrow-pc-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {

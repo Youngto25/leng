@@ -91,18 +91,7 @@ new Vue({
       })
     },
     showToastBottom(){
-      this.$toast('正常的文字',{
-        closeButton: {
-          text:'知道了',
-          callback(toast){
-            toast.log()
-            console.log('用户说他知道了')
-          },
-        },
-        position: 'bottom',
-        enableHtml: true,
-        autoClose: 10
-      })
+      
     }
   }
 })

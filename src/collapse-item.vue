@@ -8,47 +8,45 @@
     </div>
   </div>
 </template>
-
 <script>
-  export default {
-    name: "GuluCollapseItem",
-    props: {
-      title: {
-        type: String,
-        required: true
-      },
-      name: {
-        type: String,
-        required: true
+export default {
+  name: "GuluCollapseItem",
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      open: false,
+    }
+  },
+  inject: ['eventHub'],
+  mounted () {
+    this.eventHub && this.eventHub.$on('update:selected', (names) => {
+      if (names.indexOf(this.name) >= 0) {
+        this.open = true
+      } else {
+        this.open = false
+      }
+    })
+  },
+  methods: {
+    toggle () {
+      if (this.open) {
+        this.eventHub && this.eventHub.$emit('update:removeSelected', this.name)
+      } else {
+        this.eventHub && this.eventHub.$emit('update:addSelected', this.name)
       }
     },
-    data () {
-      return {
-        open: false,
-      }
-    },
-    inject: ['eventHub'],
-    mounted () {
-      this.eventHub && this.eventHub.$on('update:selected', (names) => {
-        if (names.indexOf(this.name) >= 0) {
-          this.open = true
-        } else {
-          this.open = false
-        }
-      })
-    },
-    methods: {
-      toggle () {
-        if (this.open) {
-          this.eventHub && this.eventHub.$emit('update:removeSelected', this.name)
-        } else {
-          this.eventHub && this.eventHub.$emit('update:addSelected', this.name)
-        }
-      },
-    },
-  }
+  },
+}
 </script>
-
 <style scoped lang="scss">
   $grey: #ddd;
   $border-radius: 4px;

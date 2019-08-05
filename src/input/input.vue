@@ -56,7 +56,7 @@ $red: #f1453d;
     height: $height;
     border: 1px solid $border-color;
     border-radius: 4px;
-    padding: 9px 8px;
+    padding: 4px 8px;
     font-size: inherit;
     &:hover {
       border-color: $border-color-hover;

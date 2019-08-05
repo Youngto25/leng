@@ -17,106 +17,106 @@ export default {
       visible: false
     }
   },
-  mounted () {
-      if (this.trigger === 'click') {
-        this.$refs.popover.addEventListener('click', this.onClick)
-      } else {
-        this.$refs.popover.addEventListener('mouseenter', this.open)
-        this.$refs.popover.addEventListener('mouseleave', this.close)
-      }
-    },
-    destroyed () {
-      if (this.trigger === 'click') {
-        this.$refs.popover.removeEventListener('click', this.onClick)
-      } else {
-        this.$refs.popover.removeEventListener('mouseenter', this.open)
-        this.$refs.popover.removeEventListener('mouseleave', this.close)
-      }
-    },
-    computed: {
-      openEvent () {
-        if (this.trigger === 'click') {
-          return 'click'
-        } else {
-          return 'mouseenter'
-        }
-      },
-      closeEvent () {
-        if (this.trigger === 'click') {
-          return 'click'
-        } else {
-          return 'mouseleave'
-        }
-      }
-    },
   props: {
-      position: {
-        type: String,
-        default: 'top',
-        validator (value) {
-          return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
-        }
-      },
-      trigger: {
-        type: String,
-        default: 'click',
-        validator (value) {
-          return ['click', 'hover'].indexOf(value) >= 0
-        }
+    position: {
+      type: String,
+      default: 'top',
+      validator (value) {
+        return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
       }
     },
+    trigger: {
+      type: String,
+      default: 'click',
+      validator (value) {
+        return ['click', 'hover'].indexOf(value) >= 0
+      }
+    }
+  },
+  mounted () {
+    if (this.trigger === 'click') {
+      this.$refs.popover.addEventListener('click', this.onClick)
+    } else {
+      this.$refs.popover.addEventListener('mouseenter', this.open)
+      this.$refs.popover.addEventListener('mouseleave', this.close)
+    }
+  },
+  destroyed () {
+    if (this.trigger === 'click') {
+      this.$refs.popover.removeEventListener('click', this.onClick)
+    } else {
+      this.$refs.popover.removeEventListener('mouseenter', this.open)
+      this.$refs.popover.removeEventListener('mouseleave', this.close)
+    }
+  },
+  computed: {
+    openEvent () {
+      if (this.trigger === 'click') {
+        return 'click'
+      } else {
+        return 'mouseenter'
+      }
+    },
+    closeEvent () {
+      if (this.trigger === 'click') {
+        return 'click'
+      } else {
+        return 'mouseleave'
+      }
+    }
+  },
   methods: {
     positionContent () {
-        const {contentWrapper, triggerWrapper} = this.$refs
-        document.body.appendChild(contentWrapper)
-        const {width, height, top, left} = triggerWrapper.getBoundingClientRect()
-        const {height: height2} = contentWrapper.getBoundingClientRect()
-        let positions = {
-          top: {top: top + window.scrollY, left: left + window.scrollX,},
-          bottom: {top: top + height + window.scrollY, left: left + window.scrollX},
-          left: {
-            top: top + window.scrollY + (height - height2) / 2,
-            left: left + window.scrollX
-          },
-          right: {
-            top: top + window.scrollY + (height - height2) / 2,
-            left: left + window.scrollX + width
-          },
-        }
-        contentWrapper.style.left = positions[this.position].left + 'px'
-        contentWrapper.style.top = positions[this.position].top + 'px'
-      },
-      onClickDocument (e) {
-        if (this.$refs.popover &&
-          (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))
-        ) { return }
-        if (this.$refs.contentWrapper &&
-          (this.$refs.contentWrapper === e.target || this.$refs.contentWrapper.contains(e.target))
-        ) { return }
-        this.close()
-      },
-      open () {
-        this.visible = true
-        this.$nextTick(() => {
-          this.positionContent()
-          document.addEventListener('click', this.onClickDocument)
-        })
-      },
-      close () {
-        this.visible = false
-        document.removeEventListener('click', this.onClickDocument)
-      },
-      onClick (event) {
-        if (this.$refs.triggerWrapper.contains(event.target)) {
-          if (this.visible === true) {
-            this.close()
-          } else {
-            this.open()
-          }
+      const {contentWrapper, triggerWrapper} = this.$refs
+      document.body.appendChild(contentWrapper)
+      const {width, height, top, left} = triggerWrapper.getBoundingClientRect()
+      const {height: height2} = contentWrapper.getBoundingClientRect()
+      let positions = {
+        top: {top: top + window.scrollY - height2, left: left + window.scrollX,},
+        bottom: {top: top + height + window.scrollY, left: left + window.scrollX},
+        left: {
+          top: top + window.scrollY + (height - height2) / 2,
+          left: left + window.scrollX
+        },
+        right: {
+          top: top + window.scrollY + (height - height2) / 2,
+          left: left + window.scrollX + width
+        },
+      }
+      contentWrapper.style.left = positions[this.position].left + 'px'
+      contentWrapper.style.top = positions[this.position].top + 'px'
+    },
+    onClickDocument (e) {
+      if (this.$refs.popover &&
+        (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))
+      ) { return }
+      if (this.$refs.contentWrapper &&
+        (this.$refs.contentWrapper === e.target || this.$refs.contentWrapper.contains(e.target))
+      ) { return }
+      this.close()
+    },
+    open () {
+      this.visible = true
+      this.$nextTick(() => {
+        this.positionContent()
+        document.addEventListener('click', this.onClickDocument)
+      })
+    },
+    close () {
+      this.visible = false
+      document.removeEventListener('click', this.onClickDocument)
+    },
+    onClick (event) {
+      if (this.$refs.triggerWrapper.contains(event.target)) {
+        if (this.visible === true) {
+          this.close()
+        } else {
+          this.open()
         }
       }
     }
   }
+}
 </script>
 <style lang="scss" scoped>
 $border-color: #333;
@@ -144,7 +144,6 @@ $border-radius: 4px;
     }
     &.position-top {
       filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
-      transform: translateY(-50%);
       margin-top: -10px;
       &::before, &::after {
         left: 10px;
@@ -161,7 +160,7 @@ $border-radius: 4px;
     }
     &.position-bottom {
       filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.5));
-      margin-top: -10px;
+      margin-top: 10px;
       &::before, &::after {
         left: 10px;
         border-top: none;

@@ -30,10 +30,13 @@ export default {
     }
   },
   mounted(){
+    this.eventBus.$on('getMessage',(m,n)=>{
+      this.eventBus.$emit('update:selected',m,n)
+    })
     this.$children.forEach((vm)=>{
-      if(vm.$options.name === 'g-tabs-head'){
+      if(vm.$options.name === 'TabsHead'){
         vm.$children.forEach(childVm=>{
-          if(childVm.$options.name === 'g-tabs-item' && childVm.name === this.selected){
+          if(childVm.$options.name === 'TabsItem' && childVm.name === this.selected){
            this.eventBus.$emit('update:selected',this.selected,childVm)
           }
         })
@@ -42,8 +45,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.tabs{
-
-}
-</style>
+<style lang="scss" scoped></style>

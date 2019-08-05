@@ -10,8 +10,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.tabs-body{
-  
-}
-</style>
+<style lang="scss" scoped></style>
