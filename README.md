@@ -2,7 +2,7 @@
 
 造轮子
 
-## 官网:https://youngto25.github.io/leng/docs/.vuepress/dist/index.html
+## 官网:https://youngto25.github.io/leng/
 
 ## install
 
