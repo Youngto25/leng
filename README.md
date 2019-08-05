@@ -1,7 +1,7 @@
+[![Build Status](https://travis-ci.org/Youngto25/leng.svg?branch=master)](https://travis-ci.org/Youngto25/leng)
+
 # leng
 lengzi UI 是一个好用的 UI 框架，提供了一些常用组件，适合 PC 端和移动端使用。
-
-[![Build Status](https://travis-ci.org/Youngto25/leng.svg?branch=master)](https://travis-ci.org/Youngto25/leng)
 
 ## 官网:https://youngto25.github.io/leng/
 
