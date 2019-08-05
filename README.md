@@ -1,10 +1,45 @@
 # leng
 
-造轮子
+[![Build Status](https://travis-ci.org/Youngto25/leng.svg?branch=master)](https://travis-ci.org/Youngto25/leng)
 
 ## 官网:https://youngto25.github.io/leng/
 
-## install
+## 安装
 
-使用本框架前，请在CSS中开启border-box
-[![Build Status](https://travis-ci.org/Youngto25/leng.svg?branch=master)](https://travis-ci.org/Youngto25/leng)
+在vue-cli或者webpack环境下
+```
+npm install --save-dev lengzi
+```
+
+## 盒模型
+```
+*{
+  box-sizing: border-box;
+}
+```
+
+## 可用组件
+```
+import {
+  Button,
+  ButtonGroup,
+  Icon,
+  Input,
+  Row,Col,
+  Layout,
+  Sider,
+  Content,
+  Header,
+  Footer,
+  Toast,
+  plugin,
+  Tabs,
+  TabsBody,
+  TabsHead,
+  TabsItem,
+  TabsPane,
+  Popover,
+  Collapse,
+  CollapseItem
+} from 'lengzi'
+```
